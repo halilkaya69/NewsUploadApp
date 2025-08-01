@@ -1,0 +1,124 @@
+{
+  "project_info": {
+    "project_number": "293746123866",
+    "project_id": "reactchat-15d3c",
+    "storage_bucket": "reactchat-15d3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293746123866:android:848ccd1319f30d184be463",
+        "android_client_info": {
+          "package_name": "com.example.firebaseflutterdeneme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX8vCwWaGXtqHJHx-EvN16f145JaE9ic4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293746123866:android:ca43cec2b4fc31b84be463",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_auth_profile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX8vCwWaGXtqHJHx-EvN16f145JaE9ic4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293746123866:android:5f682b60715213c54be463",
+        "android_client_info": {
+          "package_name": "com.example.profile_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX8vCwWaGXtqHJHx-EvN16f145JaE9ic4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293746123866:android:29ef14ed181722684be463",
+        "android_client_info": {
+          "package_name": "com.halilkaya.fotografpaylasma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX8vCwWaGXtqHJHx-EvN16f145JaE9ic4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293746123866:android:4612793415bd374e4be463",
+        "android_client_info": {
+          "package_name": "com.halilkaya.newsappadvanced"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX8vCwWaGXtqHJHx-EvN16f145JaE9ic4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293746123866:android:e3da0e2b20c3c7044be463",
+        "android_client_info": {
+          "package_name": "com.halilkaya.newsuploadapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX8vCwWaGXtqHJHx-EvN16f145JaE9ic4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

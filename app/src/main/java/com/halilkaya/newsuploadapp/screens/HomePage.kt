@@ -1,0 +1,61 @@
+package com.halilkaya.newsuploadapp.screens
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.halilkaya.newsuploadapp.Routes
+import com.halilkaya.newsuploadapp.components.DrawerLayout
+import com.halilkaya.newsuploadapp.viewmodel.AuthState
+import com.halilkaya.newsuploadapp.viewmodel.AuthViewModel
+import com.halilkaya.newsuploadapp.viewmodel.UserViewModel
+
+@Composable
+fun HomePage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel,userViewModel: UserViewModel) {
+    val authState = authViewModel.authState.observeAsState()
+    val currentUserId = authViewModel.currentUserId.observeAsState()
+
+    LaunchedEffect(authState.value) {
+        when(authState.value) {
+            is AuthState.Unauthenticated -> navController.navigate(Routes.login)
+            else -> Unit
+        }
+    }
+
+    DrawerLayout(
+        navController = navController,
+        authViewModel = authViewModel,
+        userViewModel = userViewModel,
+        title = "Ana Sayfa"
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Hoş Geldiniz!",
+                fontSize = 28.sp,
+                style = MaterialTheme.typography.headlineMedium
+            )
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
+            Text(
+                text = "Kullanıcı ID: ${currentUserId.value}",
+                fontSize = 16.sp,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            
+
+        }
+    }
+}
