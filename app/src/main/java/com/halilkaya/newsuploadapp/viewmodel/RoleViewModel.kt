@@ -73,6 +73,11 @@ class RoleViewModel : ViewModel() {
             }
     }
 
+    // Role request'i yenile
+    fun refreshRoleRequest() {
+        getRoleRequest()
+    }
+
 
 
     fun getAllRoleRequests() {

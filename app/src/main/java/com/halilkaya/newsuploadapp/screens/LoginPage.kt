@@ -39,13 +39,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.firebase.auth.GoogleAuthProvider
+import com.halilkaya.newsuploadapp.AppUtil
 import com.halilkaya.newsuploadapp.R
 import com.halilkaya.newsuploadapp.Routes
 import com.halilkaya.newsuploadapp.viewmodel.AuthState
 import com.halilkaya.newsuploadapp.viewmodel.AuthViewModel
+import com.halilkaya.newsuploadapp.viewmodel.LanguageViewModel
 
 @Composable
-fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authViewModel: AuthViewModel) {
+fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authViewModel: AuthViewModel,languageViewModel: LanguageViewModel) {
 
     var email by remember {
         mutableStateOf("")
@@ -59,6 +61,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
 
     val authState=authViewModel.authState.observeAsState()
     val context= LocalContext.current
+    val currentLocale = languageViewModel.getCurrentLanguageCode()
 
     //
     val googleSignInOptions= remember { //google ile giris icin gerekli ayarları yapar
@@ -81,7 +84,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
             val credential = GoogleAuthProvider.getCredential(account.idToken, null) //Firebase'e giriş yapabilmek için kimlik bilgisi (credential) oluşturuluyor
             authViewModel.signInWithGoogle(credential) //Oluşturulan kimlik bilgisi ile Firebase'e giriş yapılması için ViewModel çağrılıyor
         } catch (e: Exception) {
-            Toast.makeText(context, "Google Sign-In Failed ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context,AppUtil.getString(context, R.string.google_signin_failed,currentLocale)+ "${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -112,7 +115,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
         )
 
 
-        Text(text = "Login page", fontSize = 32.sp, fontWeight = FontWeight.Bold)
+        Text(text =  AppUtil.getString(context, R.string.login_page,currentLocale), fontSize = 32.sp, fontWeight = FontWeight.Bold)
 
 
         Spacer(modifier=Modifier.height(16.dp))
@@ -123,7 +126,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
                 email=it
             },
             label = {
-                Text(text = "Email")
+                Text(text = AppUtil.getString(context, R.string.email,currentLocale))
             }
         )
 
@@ -135,7 +138,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
                 password=it
             },
             label = {
-                Text(text = "Password")
+                Text(text = AppUtil.getString(context, R.string.password,currentLocale))
             }
         )
         Spacer(modifier=Modifier.height(16.dp))
@@ -145,7 +148,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
         },
             enabled = authState.value!=AuthState.Loading
         ) {
-            Text(text = "Login")
+            Text(text = AppUtil.getString(context, R.string.login,currentLocale))
 
         }
         Spacer(modifier=Modifier.height(8.dp))
@@ -153,7 +156,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
         TextButton(onClick = {
             navController.navigate(Routes.signup)
         }) {
-            Text(text = "Dont have an account, Signup")
+            Text(text = AppUtil.getString(context, R.string.dont_have_account,currentLocale))
 
         }
 
@@ -165,7 +168,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
                     forgotPasswordDialogBox=true
                 },
             ) {
-                Text("Forgot Password?")
+                Text(AppUtil.getString(context, R.string.forgot_password,currentLocale))
             }
         }
 
@@ -193,7 +196,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
                 }
             )*/
 
-            Image(painter = painterResource(id=R.drawable.facebook),
+            /*Image(painter = painterResource(id=R.drawable.facebook),
                 contentDescription = "facebook login",
 
                 modifier = Modifier.size(60.dp).clickable {
@@ -201,7 +204,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
                     Toast.makeText(context,"Facebook login not implemented yer",Toast.LENGTH_LONG).show()
                 }
 
-            )
+            )*/
 
             Image(painter = painterResource(id=R.drawable.google),
                 contentDescription = "google login",
@@ -217,7 +220,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
             )
 
 
-            Image(painter = painterResource(id=R.drawable.x),
+            /*Image(painter = painterResource(id=R.drawable.x),
                 contentDescription = "x login",
 
                 modifier = Modifier.size(60.dp).clickable {
@@ -225,7 +228,7 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
                     Toast.makeText(context,"x login not implemented yer",Toast.LENGTH_LONG).show()
                 }
 
-            )
+            )*/
 
         }
 
@@ -248,17 +251,17 @@ fun LoginPage(modifier: Modifier = Modifier,navController: NavController,authVie
                         onClick = {
                             authViewModel.resetPassword(resetEmail) {
                                 // Success callback
-                                Toast.makeText(context, "Check your email box to reset password", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, AppUtil.getString(context, R.string.check_email_reset,currentLocale), Toast.LENGTH_LONG).show()
                             }
                             forgotPasswordDialogBox = false
                         },
                         enabled = authState.value != AuthState.Loading
                     ){
-                        Text("Submit")
+                        Text(AppUtil.getString(context, R.string.submit,currentLocale))
                     }
                 },
                 dismissButton = {
-                    TextButton(onClick = {forgotPasswordDialogBox=false}) { Text("Cancel") }
+                    TextButton(onClick = {forgotPasswordDialogBox=false}) { Text(AppUtil.getString(context, R.string.cancel,currentLocale)) }
                 },
                 onDismissRequest = {
                     forgotPasswordDialogBox=false

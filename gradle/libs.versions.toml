@@ -10,6 +10,7 @@ activityCompose = "1.10.1"
 composeBom = "2024.04.01"
 googleGmsGoogleServices = "4.4.3"
 firebaseFirestore = "26.0.0"
+firebaseStorageKtx = "21.0.1"
 credentials = "1.5.0"
 firebaseAuthKtx = "23.1.0"
 runtimeLivedata = "1.8.3"
@@ -30,6 +31,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }

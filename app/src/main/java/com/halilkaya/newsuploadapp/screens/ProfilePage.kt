@@ -31,15 +31,17 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.halilkaya.newsuploadapp.AppUtil
+import com.halilkaya.newsuploadapp.R
 import com.halilkaya.newsuploadapp.Routes
 import com.halilkaya.newsuploadapp.UserRole
 import com.halilkaya.newsuploadapp.components.DrawerLayout
 import com.halilkaya.newsuploadapp.viewmodel.AuthState
 import com.halilkaya.newsuploadapp.viewmodel.AuthViewModel
+import com.halilkaya.newsuploadapp.viewmodel.LanguageViewModel
 import com.halilkaya.newsuploadapp.viewmodel.UserViewModel
 
 @Composable
-fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel, userViewModel: UserViewModel) {
+fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel, userViewModel: UserViewModel,languageViewModel:LanguageViewModel) {
 
     val userProfile by userViewModel.user.collectAsStateWithLifecycle()
     val authState = authViewModel.authState.observeAsState()
@@ -49,10 +51,14 @@ fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, aut
     var phoneNumberInput by remember { mutableStateOf("") }
 
     val context = LocalContext.current
+    val currentLocale = languageViewModel.getCurrentLanguageCode()
+
 
     // ProfilePage her açıldığında fresh user data çek
-    LaunchedEffect(Unit) {
-        userViewModel.getUserProfile()
+    LaunchedEffect(authState.value) {
+        if (authState.value is AuthState.Authenticated) {
+            userViewModel.getUserProfile()
+        }
     }
 
     //userProfile değiştiğinde input'ları güncelle
@@ -72,8 +78,8 @@ fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, aut
     DrawerLayout(
         navController = navController,
         authViewModel = authViewModel,
-        userViewModel=userViewModel,
-        title = "Profil"
+        userViewModel=userViewModel,languageViewModel,
+        title = AppUtil.getString(context, R.string.profile,currentLocale)
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -83,7 +89,7 @@ fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, aut
                 .verticalScroll(rememberScrollState())
         ) {
             Text(
-                text = "Profiliniz",
+                text = AppUtil.getString(context, R.string.your_profile,currentLocale),
                 style = TextStyle(
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
@@ -107,26 +113,26 @@ fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, aut
                 onValueChange = { nameInput = it },
                 label = {
                     Text(
-                        text = "İsim:",
+                        text = AppUtil.getString(context, R.string.name,currentLocale),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Medium
                     )
                 },
-                placeholder = { Text(text = "İsminizi girin") },
+                placeholder = { Text(text = AppUtil.getString(context, R.string.name_hint,currentLocale)) },
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
             )
 
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
-                text = "Email: " + userProfile.email,
+                text = AppUtil.getString(context, R.string.email_label,currentLocale) + userProfile.email,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
-                text = "Rol: " + userProfile.role,
+                text = AppUtil.getString(context, R.string.role_label,currentLocale) + userProfile.role,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium
             )
@@ -139,12 +145,12 @@ fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, aut
                 onValueChange = { cityInput = it },
                 label = {
                     Text(
-                        text = "Şehir:",
+                        text = AppUtil.getString(context, R.string.city,currentLocale),
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Medium
                     )
                 },
-                placeholder = { Text(text = "Şehrinizi girin") },
+                placeholder = { Text(text = AppUtil.getString(context, R.string.city_hint,currentLocale)) },
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
             )
 
@@ -156,8 +162,8 @@ fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, aut
                 onValueChange = { input ->
                     phoneNumberInput = input.filter { it.isDigit() }
                 },
-                label = { Text("Telefon Numarası") },
-                placeholder = { Text(text = "Telefon numaranızı girin") },
+                label = { Text(AppUtil.getString(context, R.string.phone_number,currentLocale)) },
+                placeholder = { Text(text = AppUtil.getString(context, R.string.phone_hint,currentLocale)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
             )
 
@@ -172,21 +178,21 @@ fun ProfilePage(modifier: Modifier = Modifier, navController: NavController, aut
                             role = userProfile.role,
                             phoneNumber = phoneNumberInput,
                             onSuccess = {
-                                AppUtil.showToast(context, "Profil başarıyla kaydedildi!")
+                                AppUtil.showToast(context, AppUtil.getString(context, R.string.profile_saved,currentLocale))
                             },
                             onFailure = { error ->
-                                AppUtil.showToast(context, "Profil kaydedilemedi: $error")
+                                AppUtil.showToast(context, AppUtil.getString(context, R.string.profile_save_failed,currentLocale)+" $error")
                             }
                         )
                     } else {
-                        AppUtil.showToast(context, "Lütfen tüm alanları doldurun")
+                        AppUtil.showToast(context, AppUtil.getString(context, R.string.fill_all_fields,currentLocale))
                     }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally)
             ) {
-                Text(text = "Profili Kaydet", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(text = AppUtil.getString(context, R.string.save_profile,currentLocale), fontSize = 18.sp, fontWeight = FontWeight.Bold)
             }
         }
     }

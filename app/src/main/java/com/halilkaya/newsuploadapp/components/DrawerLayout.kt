@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.halilkaya.newsuploadapp.viewmodel.AuthViewModel
+import com.halilkaya.newsuploadapp.viewmodel.LanguageViewModel
 import com.halilkaya.newsuploadapp.viewmodel.UserViewModel
 import kotlinx.coroutines.launch
 
@@ -17,6 +18,7 @@ fun DrawerLayout(
     navController: NavController,
     authViewModel: AuthViewModel,
     userViewModel: UserViewModel,
+    languageViewModel: LanguageViewModel,
     title: String,
     content: @Composable (PaddingValues) -> Unit
 ) {
@@ -29,7 +31,9 @@ fun DrawerLayout(
             NavigationDrawer(
                 navController = navController,
                 authViewModel = authViewModel,
+
                 userViewModel=userViewModel,
+                languageViewModel = languageViewModel,
                         onCloseDrawer = {
                     scope.launch {
                         drawerState.close()

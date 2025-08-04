@@ -20,6 +20,8 @@ class UserViewModel : ViewModel() {
     fun getUserProfile(){
         val currentUserUid=auth.currentUser?.uid?:return
 
+        // Loading state ekle
+        _user.value = _user.value.copy() // Mevcut değeri koru
 
         db.collection("users")
             .document(currentUserUid)
@@ -62,6 +64,11 @@ class UserViewModel : ViewModel() {
             }
 
 
+    }
+
+    // Kullanıcı profilini yenile
+    fun refreshUserProfile() {
+        getUserProfile()
     }
 
 

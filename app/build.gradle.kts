@@ -38,6 +38,10 @@ android {
     buildFeatures {
         compose = true
     }
+
+    androidResources{
+        generateLocaleConfig=true
+    }
 }
 
 dependencies {
@@ -51,6 +55,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage.ktx)
     implementation(libs.androidx.credentials)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.androidx.runtime.livedata)
@@ -67,5 +72,13 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("com.google.android.gms:play-services-auth:20.2.0")
+    
+    // Image Picker and Activity Result API
+    implementation("androidx.activity:activity-compose:1.9.2")
+    implementation("io.coil-kt:coil-compose:2.7.0") // Image loading için
+    implementation("androidx.compose.material:material-icons-extended:1.7.5") // Extended icons için
+
+
+    implementation("org.jsoup:jsoup:1.17.2")
 
 }

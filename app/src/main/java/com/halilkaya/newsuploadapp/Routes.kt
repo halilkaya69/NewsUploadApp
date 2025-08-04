@@ -6,4 +6,7 @@ object Routes{
     var signup="signup"
     var profile="profile"
     var role="role"
+    var upload="upload"
+    var settings="settings"
+    var uploadview="uploadview"
 }

@@ -1,3 +1,114 @@
 <resources>
     <string name="app_name">NewsUploadApp</string>
+
+    <!-- Login Page -->
+    <string name="login_page">Login Page</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="dont_have_account">Dont have an account? Sign up</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="google_signin_failed">Google Sign-In Failed</string>
+    <string name="check_email_reset">Check your email to reset your password</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Signup Page -->
+    <string name="signup_page">Signup Page</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_have_account">Already have an account? Login</string>
+
+    <!-- Home Page -->
+    <string name="home_title">Home Page</string>
+    <string name="welcome">Welcome!</string>
+    <string name="user_id">User ID:  </string>
+
+    <!-- Upload Page -->
+    <string name="upload_page">Upload Page</string>
+
+    <string name="role_management">Role Management</string>
+    <string name="no_permission">You do not have permission</string>
+    <string name="permission_required">Special permission is required to access this page.\nPlease contact your administrator.</string>
+    <string name="new_article_upload">Upload New Article</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="article_image">Article Image</string>
+    <string name="image_uploading">Uploading image... %d%%</string>
+    <string name="content">Content</string>
+    <string name="save_draft">Save as Draft</string>
+    <string name="submit_for_review">Submit for Review</string>
+    <string name="pending_articles">Pending Articles</string>
+    <string name="refresh">Refresh</string>
+    <string name="no_pending_articles">No Pending Articles</string>
+    <string name="new_articles_will_appear">New articles will appear here when available.</string>
+    <string name="author">Author:  </string>
+    <string name="reject">Reject</string>
+    <string name="approve">Approve</string>
+    <string name="reject_article">Reject Article</string>
+    <string name="rejection_reason">Rejection Reason</string>
+    <string name="rejection_reason_hint">Specify the reason for rejection:</string>
+
+    <!-- Settings Page -->
+    <string name="settings">Settings</string>
+    <string name="settings_title">Settings</string>
+    <string name="theme_settings">Theme Settings</string>
+    <string name="system_default">System default ( )</string>
+    <string name="light_theme">Light Theme</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+
+    <!-- Profile Page -->
+    <string name="profile">Profile</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="name">Name:</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="email_label">Email:  </string>
+    <string name="role_label">Role:  </string>
+    <string name="city">City:</string>
+    <string name="city_hint">Enter your city</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_hint">Enter your phone number</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="profile_saved">Profile saved successfully!</string>
+    <string name="profile_save_failed">Failed to save profile:  </string>
+    <string name="fill_all_fields">Please fill in all fields</string>
+
+    <!-- Role Page -->
+    <string name="role_change_request">Role Change Request</string>
+    <string name="current_role">Your Current Role:  </string>
+    <string name="select_role">Select Desired Role:</string>
+    <string name="send_role_request">Send Role Request</string>
+    <string name="role_request_sent">Role request sent successfully!</string>
+    <string name="role_request_failed">Failed to send role request:  </string>
+    <string name="select_different_role">Please select a role different from your current role</string>
+    <string name="pending_role_request">Your Pending Role Request</string>
+    <string name="requested_role">Requested Role:  </string>
+    <string name="waiting_admin_approval">Your role request is waiting for admin approval...</string>
+    <string name="all_role_requests">All Role Requests</string>
+    <string name="no_role_requests">There are no role requests.</string>
+    <string name="name_field">Name:  </string>
+    <string name="email_field">Email:  </string>
+    <string name="requested_role_field">Requested Role:  </string>
+    <string name="accept">✓ Accept</string>
+    <string name="reject_request">✗ Reject</string>
+    <string name="role_updated">Role updated successfully.</string>
+    <string name="role_update_failed">Role update failed:  </string>
+    <string name="role_request_rejected">Role request has been rejected.</string>
+    <string name="rejection_failed">Rejection failed:  </string>
+    <string name="welcome_admin">Welcome, admin!</string>
+
+    <!-- Navigation Drawer -->
+    <string name="home">Home</string>
+    <string name="role">Role</string>
+    <string name="role_requests">Role Requests</string>
+    <string name="upload">Upload</string>
+    <string name="upload_requests">Upload Requests</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="user_avatar">User Avatar</string>
+    <string name="news_upload_app">News Upload App</string>
+
+    <!-- Content Descriptions -->
+    <string name="logo_image">Logo Image</string>
+    <string name="google_login">Google Login</string>
 </resources>

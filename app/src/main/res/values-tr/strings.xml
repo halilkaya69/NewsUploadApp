@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Haber Yükleme Uygulaması</string>
+    
+    <!-- Login Page -->
+    <string name="login_page">Giriş sayfası</string>
+    <string name="email">E-posta</string>
+    <string name="password">Şifre</string>
+    <string name="login">Giriş Yap</string>
+    <string name="dont_have_account">Hesabınız yok mu? Kayıt olun</string>
+    <string name="forgot_password">Şifremi Unuttum?</string>
+    <string name="google_signin_failed">Google ile giriş başarısız</string>
+    <string name="check_email_reset">Şifre sıfırlama için e-posta kutunuzu kontrol edin</string>
+    <string name="submit">Gönder</string>
+    <string name="cancel">İptal</string>
+    
+    <!-- Signup Page -->
+    <string name="signup_page">Kayıt sayfası</string>
+    <string name="create_account">Hesap oluştur</string>
+    <string name="already_have_account">Zaten hesabınız var mı? Giriş yapın</string>
+    
+    <!-- Home Page -->
+    <string name="home_title">Ana Sayfa</string>
+    <string name="welcome">Hoş Geldiniz!</string>
+    <string name="user_id">Kullanıcı ID: </string>
+    
+    <!-- Upload Page -->
+    <string name="upload_page">Yükleme Sayfası</string>
+
+    <string name="role_management">Rol Yönetimi</string>
+    <string name="no_permission">Yetkiniz Bulunmuyor</string>
+    <string name="permission_required">Bu sayfaya erişim için özel yetki gereklidir.\nLütfen yöneticinizle iletişime geçin.</string>
+    <string name="new_article_upload">Yeni Makale Yükle</string>
+    <string name="title">Başlık</string>
+    <string name="description">Açıklama</string>
+    <string name="article_image">Makale Resmi</string>
+    <string name="image_uploading">Resim yükleniyor... %d%%</string>
+    <string name="content">İçerik</string>
+    <string name="save_draft">Taslak Kaydet</string>
+    <string name="submit_for_review">Onaya Gönder</string>
+    <string name="pending_articles">Onay Bekleyen Makaleler</string>
+    <string name="refresh">Yenile</string>
+    <string name="no_pending_articles">Onay Bekleyen Makale Yok</string>
+    <string name="new_articles_will_appear">Yeni makaleler geldiğinde burada görünecektir.</string>
+    <string name="author">Yazar: </string>
+    <string name="reject">Reddet</string>
+    <string name="approve">Onayla</string>
+    <string name="reject_article">Makaleyi Reddet</string>
+    <string name="rejection_reason">Reddedilme sebebi</string>
+    <string name="rejection_reason_hint">Reddedilme sebebini belirtin:</string>
+    
+    <!-- Settings Page -->
+    <string name="settings">Ayarlar</string>
+    <string name="settings_title">Ayarlar</string>
+    <string name="theme_settings">Tema Ayarları</string>
+    <string name="system_default">Sistem varsayılanı ()</string>
+    <string name="light_theme">Açık Tema</string>
+    <string name="dark_theme">Koyu Tema</string>
+    <string name="dark">Koyu</string>
+    <string name="light">Açık</string>
+    
+    <!-- Profile Page -->
+    <string name="profile">Profil</string>
+    <string name="your_profile">Profiliniz</string>
+    <string name="name">İsim:</string>
+    <string name="name_hint">İsminizi girin</string>
+    <string name="email_label">E-posta: </string>
+    <string name="role_label">Rol: </string>
+    <string name="city">Şehir:</string>
+    <string name="city_hint">Şehrinizi girin</string>
+    <string name="phone_number">Telefon Numarası</string>
+    <string name="phone_hint">Telefon numaranızı girin</string>
+    <string name="save_profile">Profili Kaydet</string>
+    <string name="profile_saved">Profil başarıyla kaydedildi!</string>
+    <string name="profile_save_failed">Profil kaydedilemedi: </string>
+    <string name="fill_all_fields">Lütfen tüm alanları doldurun</string>
+    
+    <!-- Role Page -->
+    <string name="role_change_request">Rol Değişikliği İsteği</string>
+    <string name="current_role">Mevcut Rolünüz: </string>
+    <string name="select_role">İstediğiniz Rolü Seçin:</string>
+    <string name="send_role_request">Rol İsteği Gönder</string>
+    <string name="role_request_sent">Rol isteği başarıyla gönderildi!</string>
+    <string name="role_request_failed">Rol isteği gönderilemedi: </string>
+    <string name="select_different_role">Lütfen mevcut rolünüzden farklı bir rol seçin</string>
+    <string name="pending_role_request">Bekleyen Rol İsteğiniz</string>
+    <string name="requested_role">İstenen Rol: </string>
+    <string name="waiting_admin_approval">Rol isteğiniz admin onayı bekliyor...</string>
+    <string name="all_role_requests">Tüm Rol İstekleri</string>
+    <string name="no_role_requests">Hiç rol isteği yok.</string>
+    <string name="name_field">İsim: </string>
+    <string name="email_field">E-posta: </string>
+    <string name="requested_role_field">İstenen Rol: </string>
+    <string name="accept">✓ Kabul Et</string>
+    <string name="reject_request">✗ Reddet</string>
+    <string name="role_updated">Rol başarıyla güncellendi.</string>
+    <string name="role_update_failed">Güncelleme başarısız: </string>
+    <string name="role_request_rejected">Rol isteği reddedildi.</string>
+    <string name="rejection_failed">Reddetme başarısız: </string>
+    <string name="welcome_admin">Hoş Geldiniz admin!</string>
+    
+    <!-- Navigation Drawer -->
+    <string name="home">Ana Sayfa</string>
+    <string name="role">Rol</string>
+    <string name="role_requests">Rol İstekleri</string>
+    <string name="upload">Yükle</string>
+    <string name="upload_requests">Yükleme İstekleri</string>
+    <string name="sign_out">Çıkış Yap</string>
+    <string name="user_avatar">Kullanıcı Avatarı</string>
+    <string name="news_upload_app">Haber Yükleme Uygulaması</string>
+    
+    <!-- Content Descriptions -->
+    <string name="logo_image">logo resmi</string>
+    <string name="google_login">google girişi</string>
+    
+</resources>

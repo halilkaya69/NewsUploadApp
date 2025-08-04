@@ -39,17 +39,19 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.halilkaya.newsuploadapp.AppUtil
+import com.halilkaya.newsuploadapp.R
 import com.halilkaya.newsuploadapp.Routes
 import com.halilkaya.newsuploadapp.UserRole
 import com.halilkaya.newsuploadapp.components.DrawerLayout
 import com.halilkaya.newsuploadapp.model.RoleModel
 import com.halilkaya.newsuploadapp.viewmodel.AuthState
 import com.halilkaya.newsuploadapp.viewmodel.AuthViewModel
+import com.halilkaya.newsuploadapp.viewmodel.LanguageViewModel
 import com.halilkaya.newsuploadapp.viewmodel.RoleViewModel
 import com.halilkaya.newsuploadapp.viewmodel.UserViewModel
 
 @Composable
-fun RolePage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel, userViewModel: UserViewModel,roleViewModel: RoleViewModel) {
+fun RolePage(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel, userViewModel: UserViewModel,roleViewModel: RoleViewModel,languageViewModel: LanguageViewModel) {
 
     val context= LocalContext.current
 
@@ -61,10 +63,13 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
 
     var roleInput by remember { mutableStateOf(UserRole.USER.name) }
 
+    val currentLocale = languageViewModel.getCurrentLanguageCode()
 
     // ProfilePage her açıldığında fresh user data çek
-    LaunchedEffect(Unit) {
-        userViewModel.getUserProfile()
+    LaunchedEffect(authState.value) {
+        if (authState.value is AuthState.Authenticated) {
+            userViewModel.getUserProfile()
+        }
     }
 
     // userProfile değiştiğinde role isteklerini çek
@@ -89,8 +94,8 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
     DrawerLayout(
         navController = navController,
         authViewModel = authViewModel,
-        userViewModel = userViewModel,
-        title = "Rol Yönetimi"
+        userViewModel = userViewModel,languageViewModel,
+        title = AppUtil.getString(context, R.string.role_change_request,currentLocale)
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -108,7 +113,7 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Text(
-                    text = "Hoş Geldiniz admin!",
+                    text = AppUtil.getString(context, R.string.welcome_admin, currentLocale),
                     fontSize = 28.sp,
                     style = MaterialTheme.typography.headlineMedium
                 )
@@ -122,14 +127,14 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
 
                 Column {
                     Text(
-                        text = "Tüm Rol İstekleri",
+                        text = AppUtil.getString(context, R.string.all_role_requests, currentLocale),
                         fontWeight = FontWeight.Bold,
                         fontSize = 24.sp,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
 
                     if(roleRequests.isEmpty()) {
-                        Text("Hiç rol isteği yok.")
+                        Text(AppUtil.getString(context, R.string.no_role_requests, currentLocale))
                     } else {
                         LazyColumn(
                             verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -155,13 +160,13 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                                     Spacer(modifier = Modifier.height(4.dp))
                                     
                                     Text(
-                                        text = "E-posta: ${request.email}",
+                                        text = AppUtil.getString(context, R.string.email_field, currentLocale)+"${request.email}",
                                         fontSize = 14.sp
                                     )
                                     Spacer(modifier = Modifier.height(4.dp))
                                     
                                     Text(
-                                        text = "İstenen Rol: ${request.role.name}",
+                                        text = AppUtil.getString(context, R.string.requested_role_field, currentLocale)+"${request.role.name}",
                                         fontWeight = FontWeight.Bold,
                                         fontSize = 16.sp,
                                         color = MaterialTheme.colorScheme.primary
@@ -182,11 +187,11 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                                                     newRole = request.role,
                                                     userViewModel = userViewModel,
                                                     onSuccess = {
-                                                        AppUtil.showToast(context, "Rol başarıyla güncellendi.")
+                                                        AppUtil.showToast(context, AppUtil.getString(context, R.string.role_updated, currentLocale))
                                                         roleViewModel.getAllRoleRequests() // Listeyi yenile
                                                     },
                                                     onFailure = { error ->
-                                                        AppUtil.showToast(context, "Güncelleme başarısız: $error")
+                                                        AppUtil.showToast(context, AppUtil.getString(context, R.string.role_update_failed, currentLocale)+"${error}")
                                                     }
                                                 )
                                             },
@@ -195,7 +200,7 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                                             ),
                                             modifier = Modifier.weight(1f)
                                         ) {
-                                            Text("✓ Kabul Et", fontWeight = FontWeight.Bold)
+                                            Text(AppUtil.getString(context, R.string.accept, currentLocale), fontWeight = FontWeight.Bold)
                                         }
 
                                         TextButton(
@@ -204,12 +209,11 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                                                 roleViewModel.rejectRoleRequest(
                                                     uid = request.email,
                                                     onSuccess = {
-                                                        AppUtil.showToast(context, "Rol isteği reddedildi.")
+                                                        AppUtil.showToast(context, AppUtil.getString(context, R.string.role_request_rejected, currentLocale))
                                                         roleViewModel.getAllRoleRequests() // Listeyi yenile
                                                     },
                                                     onFailure = { error ->
-                                                        AppUtil.showToast(context, "Reddetme başarısız: $error")
-                                                    }
+                                                        AppUtil.showToast(context, AppUtil.getString(context, R.string.rejection_failed, currentLocale)+"${error}")                                                    }
                                                 )
                                             },
                                             colors = ButtonDefaults.textButtonColors(
@@ -217,7 +221,7 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                                             ),
                                             modifier = Modifier.weight(1f)
                                         ) {
-                                            Text("✗ Reddet", fontWeight = FontWeight.Bold)
+                                            Text(AppUtil.getString(context, R.string.reject_request, currentLocale), fontWeight = FontWeight.Bold)
                                         }
                                     }
                                 }
@@ -231,14 +235,14 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                     if(currentRequest == null) {
                         // Rol isteği gönderebilir
                         Text(
-                            text = "Rol Değişikliği İsteği",
+                            text = AppUtil.getString(context, R.string.role_change_request, currentLocale),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(bottom = 16.dp)
                         )
                         
                         Text(
-                            text = "Mevcut Rolünüz: ${userProfile.role.name}",
+                            text = AppUtil.getString(context, R.string.current_role, currentLocale)+"${userProfile.role.name}",
                             fontSize = 16.sp,
                             modifier = Modifier.padding(bottom = 16.dp)
                         )
@@ -248,7 +252,7 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
 
                         Column {
                             Text(
-                                text = "İstediğiniz Rolü Seçin:",
+                                text = AppUtil.getString(context, R.string.select_role, currentLocale),
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium,
                                 modifier = Modifier.padding(bottom = 8.dp)
@@ -283,20 +287,20 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                                             name = userProfile.name,
                                             role = selectedRole, // selectedRole kullanılmalı, userProfile.role değil
                                             onSuccess = {
-                                                AppUtil.showToast(context, "Rol isteği başarıyla gönderildi!")
+                                                AppUtil.showToast(context, AppUtil.getString(context, R.string.role_request_sent, currentLocale))
                                                 roleViewModel.getRoleRequest() // Güncel isteği çek
                                             },
                                             onFailure = { error ->
-                                                AppUtil.showToast(context, "Rol isteği gönderilemedi: $error")
+                                                AppUtil.showToast(context, AppUtil.getString(context, R.string.role_request_failed, currentLocale)+"${error}")
                                             }
                                         )
                                     } else {
-                                        AppUtil.showToast(context, "Lütfen mevcut rolünüzden farklı bir rol seçin")
+                                        AppUtil.showToast(context, AppUtil.getString(context, R.string.select_different_role, currentLocale))
                                     }
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
-                                Text(text = "Rol İsteği Gönder", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                                Text(text = AppUtil.getString(context, R.string.send_role_request, currentLocale), fontSize = 18.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     } else {
@@ -306,27 +310,27 @@ fun RolePage(modifier: Modifier = Modifier, navController: NavController, authVi
                             modifier = Modifier.padding(16.dp)
                         ) {
                             Text(
-                                text = "Bekleyen Rol İsteğiniz",
+                                text = AppUtil.getString(context, R.string.pending_role_request, currentLocale),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(bottom = 16.dp)
                             )
                             
                             Text(
-                                text = "Mevcut Rolünüz: ${userProfile.role.name}",
+                                text = AppUtil.getString(context, R.string.current_role, currentLocale)+"${userProfile.role.name}",
                                 fontSize = 16.sp,
                                 modifier = Modifier.padding(bottom = 8.dp)
                             )
                             
                             Text(
-                                text = "İstenen Rol: ${currentRequest.role.name}",
+                                text = AppUtil.getString(context, R.string.requested_role, currentLocale)+"${currentRequest.role.name}",
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Medium,
                                 modifier = Modifier.padding(bottom = 16.dp)
                             )
                             
                             Text(
-                                text = "Rol isteğiniz admin onayı bekliyor...",
+                                text = AppUtil.getString(context, R.string.waiting_admin_approval, currentLocale),
                                 fontSize = 14.sp,
                                 style = MaterialTheme.typography.bodyMedium
                             )

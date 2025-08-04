@@ -39,13 +39,15 @@ import androidx.navigation.NavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.GoogleAuthProvider
+import com.halilkaya.newsuploadapp.AppUtil
 import com.halilkaya.newsuploadapp.R
 import com.halilkaya.newsuploadapp.Routes
 import com.halilkaya.newsuploadapp.viewmodel.AuthState
 import com.halilkaya.newsuploadapp.viewmodel.AuthViewModel
+import com.halilkaya.newsuploadapp.viewmodel.LanguageViewModel
 
 @Composable
-fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authViewModel: AuthViewModel) {
+fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authViewModel: AuthViewModel,languageViewModel: LanguageViewModel) {
 
     var email by remember {
         mutableStateOf("")
@@ -56,6 +58,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
 
     val authState=authViewModel.authState.observeAsState()
     val context= LocalContext.current
+    val currentLocale = languageViewModel.getCurrentLanguageCode()
 
     //
     val googleSignInOptions= remember { //google ile giris icin gerekli ayarları yapar
@@ -80,7 +83,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
             val credential = GoogleAuthProvider.getCredential(account.idToken, null) //Firebase'e giriş yapabilmek için kimlik bilgisi (credential) oluşturuluyor
             authViewModel.signInWithGoogle(credential) //Oluşturulan kimlik bilgisi ile Firebase'e giriş yapılması için ViewModel çağrılıyor
         } catch (e: Exception) {
-            Toast.makeText(context, "Google Sign-In Failed ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, AppUtil.getString(context, R.string.google_signin_failed,currentLocale)+ "${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -106,7 +109,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
             modifier = Modifier.size(200.dp)
         )
 
-        Text(text = "Signup page", fontSize = 32.sp, fontWeight = FontWeight.Bold)
+        Text(text = AppUtil.getString(context, R.string.signup_page,currentLocale), fontSize = 32.sp, fontWeight = FontWeight.Bold)
 
 
         Spacer(modifier=Modifier.height(16.dp))
@@ -117,7 +120,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
                 email=it
             },
             label = {
-                Text(text = "Email")
+                Text(text = AppUtil.getString(context, R.string.email,currentLocale))
             }
         )
 
@@ -129,7 +132,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
                 password=it
             },
             label = {
-                Text(text = "Password")
+                Text(text = AppUtil.getString(context, R.string.password,currentLocale))
             }
         )
         Spacer(modifier=Modifier.height(16.dp))
@@ -142,7 +145,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
         },
             enabled = authState.value!=AuthState.Loading
         ) {
-            Text(text = "Create account")
+            Text(text = AppUtil.getString(context, R.string.create_account,currentLocale))
 
         }
         Spacer(modifier=Modifier.height(8.dp))
@@ -150,7 +153,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
         TextButton(onClick = {
             navController.navigate(Routes.login)
         }) {
-            Text(text = "Already have an account, Login")
+            Text(text = AppUtil.getString(context, R.string.already_have_account,currentLocale))
 
         }
 
@@ -183,7 +186,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
                 }
             )*/
 
-            Image(painter = painterResource(id=R.drawable.facebook),
+/*            Image(painter = painterResource(id=R.drawable.facebook),
                 contentDescription = "facebook login",
 
                 modifier = Modifier.size(60.dp).clickable {
@@ -191,7 +194,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
                     Toast.makeText(context,"Facebook login not implemented yer",Toast.LENGTH_LONG).show()
                 }
 
-            )
+            )*/
 
             Image(painter = painterResource(id=R.drawable.google),
                 contentDescription = "google login",
@@ -207,7 +210,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
             )
 
 
-            Image(painter = painterResource(id=R.drawable.x),
+          /*  Image(painter = painterResource(id=R.drawable.x),
                 contentDescription = "x login",
 
                 modifier = Modifier.size(60.dp).clickable {
@@ -215,7 +218,7 @@ fun SignupPage(modifier: Modifier = Modifier,navController: NavController,authVi
                     Toast.makeText(context,"x login not implemented yer",Toast.LENGTH_LONG).show()
                 }
 
-            )
+            )*/
 
         }
 
